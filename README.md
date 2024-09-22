@@ -1,1 +1,1 @@
-# js30-random-jokes
+https://SiarheiKazakevich.github.io/js30-random-jokes/
