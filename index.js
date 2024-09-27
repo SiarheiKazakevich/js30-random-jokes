@@ -1,4 +1,4 @@
-let quotes = [
+/* let quotes = [
   {
     author_ru: "Волк Бегун",
     ru: "Лучше быть последним — первым, чем первым — последним.",
@@ -216,7 +216,6 @@ let quotes = [
     en: "Better to have a friend than each other.",
   },
 ];
-
 // Получаем элементы
 const quoteText = document.querySelector(".funchuck2");
 const btn = document.querySelector(".funchuck");
@@ -256,4 +255,99 @@ document.addEventListener("DOMContentLoaded", () => {
 btn.addEventListener("click", () => {
   changeQuote();
   applyRandomAnimation();
+});
+*/
+
+const audio = document.getElementById("audio");
+const playPauseBtn = document.getElementById("play-pause");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const progressBar = document.getElementById("progress-bar");
+const currentTimeEl = document.getElementById("current-time");
+const durationEl = document.getElementById("duration");
+const cover = document.getElementById("cover");
+const trackTitle = document.getElementById("track-title");
+const trackArtist = document.getElementById("track-artist");
+
+const tracks = [
+  {
+    title: "Track 1",
+    artist: "Artist 1",
+    src: "assets/audio/beyonce.mp3",
+    cover: "assets/img/lemonade.png",
+  },
+  {
+    title: "Track 2",
+    artist: "Artist 2",
+    src: "assets/audio/dontstartnow.mp3",
+    cover: "assets/img/dontstartnow.png",
+  },
+  {
+    title: "Track 3",
+    artist: "Artist 3",
+    src: "assets/audio/beyonce.mp3",
+    cover: "assets/img/lemonade.png",
+  },
+];
+
+let currentTrackIndex = 0;
+let isPlaying = false;
+
+function loadTrack(index) {
+  audio.src = tracks[index].src;
+  cover.src = tracks[index].cover;
+  trackTitle.textContent = tracks[index].title;
+  trackArtist.textContent = tracks[index].artist;
+}
+
+function playPause() {
+  if (isPlaying) {
+    audio.pause();
+    playPauseBtn.textContent = "▶️";
+  } else {
+    audio.play();
+    playPauseBtn.textContent = "⏸️";
+  }
+  isPlaying = !isPlaying;
+}
+
+function updateProgressBar() {
+  progressBar.value = (audio.currentTime / audio.duration) * 100;
+  currentTimeEl.textContent = formatTime(audio.currentTime);
+  if (!audio.duration) return;
+  durationEl.textContent = formatTime(audio.duration);
+}
+
+function changeTrack(direction) {
+  currentTrackIndex += direction;
+  if (currentTrackIndex < 0) {
+    currentTrackIndex = tracks.length - 1;
+  } else if (currentTrackIndex >= tracks.length) {
+    currentTrackIndex = 0;
+  }
+  loadTrack(currentTrackIndex);
+  audio.play();
+  playPauseBtn.textContent = "⏸️";
+  isPlaying = true;
+}
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+}
+
+audio.addEventListener("timeupdate", updateProgressBar);
+progressBar.addEventListener("input", () => {
+  audio.currentTime = (progressBar.value / 100) * audio.duration;
+});
+
+playPauseBtn.addEventListener("click", playPause);
+prevBtn.addEventListener("click", () => changeTrack(-1));
+nextBtn.addEventListener("click", () => changeTrack(1));
+
+audio.addEventListener("ended", () => changeTrack(1));
+
+window.addEventListener("load", () => {
+  loadTrack(currentTrackIndex);
 });

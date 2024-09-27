@@ -1,4 +1,4 @@
-body {
+/*body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
 }
@@ -42,10 +42,10 @@ body {
   margin-top: 2rem;
   color: hsl(210, 22%, 49%);
   font-size: 1.5rem;
-}
+}*/
 
 /* Random animation styles */
-.shake {
+/*.shake {
   animation: shake 0.5s;
 }
 
@@ -130,4 +130,74 @@ footer a {
 footer img {
   height: 30px;
   vertical-align: middle;
+}*/
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.audio-player {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.cover {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.track-info {
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-btn {
+  background-color: #49a6e9;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.progress-bar-container {
+  margin-top: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+footer a {
+  text-decoration: none;
+  color: #49a6e9;
+}
+
+footer p {
+  margin: 0;
 }
